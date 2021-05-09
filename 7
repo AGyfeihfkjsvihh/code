@@ -1,0 +1,15 @@
+Holder h1(10000);  // regular constructor
+Holder h2(60000);  // regular constructor
+h1 = h2;           // assignment operator
+
+下面是拷贝赋值构造函数的实现
+
+Holder& operator=(const Holder& other) 
+{
+  if(this == &other) return *this;  // (1)
+  delete[] m_data;  // (2)
+  m_data = new int[other.m_size];
+  std::copy(other.m_data, other.m_data + other.m_size, m_data);
+  m_size = other.m_size;
+  return *this;  // (3)
+}
