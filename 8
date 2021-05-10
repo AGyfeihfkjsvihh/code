@@ -1,0 +1,12 @@
+void foo(X&& x)
+{
+  //在该方法中，右值引用有一个名字，叫做x，所以他是一个左值
+  //这个时候，就会调用X类的copy赋值构造函数
+  X anotherX = x; // calls X(X const & rhs)
+}
+
+//这里声明了一个返回X&&右值引用的一个方法foo
+X&& goo();
+//这里进行调用，返回值并没有名字，就像一个临时对象一样，因此在这里他是一个右值，因此会调用move赋值构造函数
+X x = goo(); // calls X(X&& rhs) because the thing on
+             // the right hand side has no name
